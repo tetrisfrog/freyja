@@ -12,7 +12,8 @@ CC=gcc
 TARGET=render_ogl.so
 
 ## Object list
-OBJS = render_main.o display.o
+PLATFORM_OBJS = os_linux/xdisplay.o
+OBJS = render_main.o display.o $(PLATFORM_OBJS)
 LIBS = -ldl -lX11 -lGL -lGLU
 
 ## Compilation & Programming parameters

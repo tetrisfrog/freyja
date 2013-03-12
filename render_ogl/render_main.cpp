@@ -16,7 +16,7 @@
 
 int frz_init(FRE_RENDER_INIT_DATA* rdata) {
 	
-	condex_sz = 0;
+	frz_context_init();
 
 	// link to Freyja Core functions
 	logthis = rdata->logthis_ptr;
@@ -26,31 +26,4 @@ int frz_init(FRE_RENDER_INIT_DATA* rdata) {
 	zlog_info("** Built " __DATE__ " " __TIME__ "\n");
 
 	return 123;
-}
-
-
-int frz_context_create() {
-	int newcon;
- 
-	newcon = condex_sz;
-	condex_sz++;
-
-	memset(&condex[newcon],0,sizeof(FRZ_OGLX_CONTEXT));
-
-	// set default attribs
-	condex[newcon].att[0] = GLX_RGBA;
-	condex[newcon].att[1] = GLX_DEPTH_SIZE;
-	condex[newcon].att[2] = 24;
-	condex[newcon].att[3] = GLX_DOUBLEBUFFER;
-	condex[newcon].att[4] = None;
-
-	// default/fallback res
-	condex[newcon].sz_x = 640;
-	condex[newcon].sz_y = 480;
-
-	return newcon;
-}
-
-void* frz_context_ptr(int cdex) {
-	return &condex[cdex];
 }

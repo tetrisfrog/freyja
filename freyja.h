@@ -15,7 +15,15 @@
 #include <stdarg.h>
 #include <malloc.h>
 
-#define FRE_VERSION_STRING "0.01 WIP"
+// nasty hacky preprocessor stringification macros
+#define FRE_STRINGIFY(x) #x
+#define FRE_TOSTRING(x) FRE_STRINGIFY(x)
+
+// Verision & Revision definitions
+#define FRE_VERSION 		"0.01"
+#define FRE_VERSION_MOD		"WIP"
+#define FRE_REV_STR			FRE_TOSTRING(FRE_REV)
+#define FRE_VERSION_STRING  FRE_VERSION "." FRE_REV_STR " " FRE_VERSION_MOD
 #define FRE_COMPILE_TIME	__DATE__ " " __TIME__
 
 // Constant defines

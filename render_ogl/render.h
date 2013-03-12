@@ -44,8 +44,6 @@
 		int reqs;
 	} FRZ_OGL_EXT;
 
- 	ZREXPORT FRZ_OGLX_CONTEXT condex[FRZ_MAX_CONTEXT];
- 	ZREXPORT int condex_sz;
 	ZREXPORT void (*logthis)(int llevel, char* srcname, int srcline, char* fmt, ...);
 	ZREXPORT void (*fre_shutdown)();
 
@@ -60,22 +58,29 @@
 	extern "C" {
 
 		int frz_init(FRE_RENDER_INIT_DATA* rdata);
-		int frz_gfx_init(FRZ_OGLX_CONTEXT* rtx);
+		int frz_gfx_init(int ctx);
 		int frz_gfx_check_ext(char* extname);
-		int frz_gfx_kill(FRZ_OGLX_CONTEXT* rtx);
-		int frz_gfx_update(FRZ_OGLX_CONTEXT* rtx);
+		int frz_gfx_kill(int ctx);
+		int frz_gfx_update(int ctx);
+
+		void frz_context_init();
 		void* frz_context_ptr(int cdex);
 		int frz_context_create();
-		int frz_gfx_bind_glext();
+		void frz_context_destroy(int ctx);
 
+		int frz_gfx_bind_glext();
+		
+		int frz_subsys_init_display(int ctx);
+		char* frz_subsys_enum_oglext(int ctx);
+		int frz_gfx_render();
 	}
 
 #else
 
 	ZEXPORTC int (*frz_init)(FRE_RENDER_INIT_DATA* rdata);
-	ZEXPORTC int (*frz_gfx_init)(void* cptr);
-	ZEXPORTC int (*frz_gfx_kill)(void* cptr);
-	ZEXPORTC int (*frz_gfx_update)(void* cptr);
+	ZEXPORTC int (*frz_gfx_init)(int ctx);
+	ZEXPORTC int (*frz_gfx_kill)(int ctx);
+	ZEXPORTC int (*frz_gfx_update)(int ctx);
 	ZEXPORTC void* (*frz_context_ptr)(int cdex);
 	ZEXPORTC int (*frz_context_create)();
 

@@ -31,32 +31,14 @@ int  ogl_ext_sz;
 
 int tex_units;
 
- int frz_gfx_init(FRZ_OGLX_CONTEXT* rtx) {
+int frz_gfx_init(int ctx) {
 
- 	if((rtx->dpy = XOpenDisplay(NULL)) == NULL) {
- 		// Failed to open display
+ 	int rval;
+
+ 	if(rval = frz_subsys_init_display(ctx)) {
+ 		zlog_error("frz_gfx_init: Failed to initialize graphics subsystem! frz_subsys_init_display() failed with %i rval.\n",rval);
  		return 1;
  	}
-
- 	rtx->rootwin = DefaultRootWindow(rtx->dpy);
-
- 	if((rtx->vi = glXChooseVisual(rtx->dpy, 0, rtx->att)) == NULL) {
- 		// Failed to choose visual mode
- 		return 2;
- 	}
-
- 	rtx->cmap = XCreateColormap(rtx->dpy, rtx->rootwin, rtx->vi->visual, AllocNone);
-
- 	rtx->swa.colormap = rtx->cmap;
- 	rtx->swa.event_mask = ExposureMask | KeyPressMask;
-
- 	rtx->win = XCreateWindow(rtx->dpy, rtx->rootwin, 0, 0, rtx->sz_x, rtx->sz_y, 0, rtx->vi->depth, InputOutput, rtx->vi->visual, CWColormap | CWEventMask, &rtx->swa);
-
-	XMapWindow(rtx->dpy, rtx->win);
-	XStoreName(rtx->dpy, rtx->win, "Freyja Test");
-	 
-	rtx->glc = glXCreateContext(rtx->dpy, rtx->vi, NULL, GL_TRUE);
-	glXMakeCurrent(rtx->dpy, rtx->win, rtx->glc);
 
 	// Renderer info
 	zlog_info("*** Rendering subsystem information **\n"
@@ -91,9 +73,10 @@ int tex_units;
 	}
 
 	// GLX Extension caps
+	// frz_subsys_enum_oglext()
 	char* glx_ext_ptr;
 	int glx_ext_strlen;
-	if((glx_ext_ptr = strdup(glXQueryExtensionsString(rtx->dpy,0))) == NULL) {
+	if((glx_ext_ptr = strdup(frz_subsys_enum_oglext(ctx))) == NULL) {
 		zlog_error("frz_gfx_init: glXQueryExtensionsString() failed!\n");
 		return 1;
 	}
@@ -220,16 +203,7 @@ int frz_gfx_check_ext(char* extname) {
 	else return 0;
 }
 
- int frz_gfx_kill(FRZ_OGLX_CONTEXT* rtx) {
-	glXMakeCurrent(rtx->dpy, None, NULL);
-	glXDestroyContext(rtx->dpy, rtx->glc);
-	XDestroyWindow(rtx->dpy, rtx->win);
-	XCloseDisplay(rtx->dpy);
-
-	return 0;
- }
-
-void DrawAQuad() {
+int frz_gfx_render() {
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -247,21 +221,6 @@ void DrawAQuad() {
 	glColor3f(0., 0., 1.); glVertex3f( .75,  .75, 0.);
 	glColor3f(1., 1., 0.); glVertex3f(-.75,  .75, 0.);
 	glEnd();
-}
-
-int frz_gfx_update(FRZ_OGLX_CONTEXT* rtx) {
-	XNextEvent(rtx->dpy, &rtx->xev);
-
-	if(rtx->xev.type == Expose) {
-		XGetWindowAttributes(rtx->dpy, rtx->win, &rtx->gwa);
-		glViewport(0, 0, rtx->gwa.width, rtx->gwa.height);
-		DrawAQuad(); 
-		glXSwapBuffers(rtx->dpy, rtx->win);
-		return 1;
-	} else if(rtx->xev.type == KeyPress) {
-		frz_gfx_kill(rtx);
-		return 2;
-	}	
 
 	return 0;
 }

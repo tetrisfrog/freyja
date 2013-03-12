@@ -89,11 +89,11 @@ FRE_LIBFUNC render_funcs[] = {
  	zlog_debug("init_rval = %i\n",init_rval);
 
  	context = frz_context_create();
- 	frz_gfx_init(frz_context_ptr(context));
+ 	frz_gfx_init(context);
 
 	zlog_debug("Entering test loop...\n");
 
-	while(frz_gfx_update(frz_context_ptr(context)) != 2);
+	while(frz_gfx_update(context) != 2);
 
 	zlog_debug("Shutting down...\n");
 

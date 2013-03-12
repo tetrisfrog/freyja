@@ -11,12 +11,15 @@
 CC=gcc
 TARGET=freyja
 
+## Build information
+GIT_REVISION = `git rev-list HEAD --count`
+
 ## Object list
 OBJS = asset_mgmt.o config_mgmt.o core_control.o debug.o loadlib.o script_control.o os_linux/os_control.o
 LIBS = -ldl
 
 ## Compilation & Programming parameters
-CFLAGS = -O1 -I. -DFREYJA_CORE
+CFLAGS = -O1 -I. -DFREYJA_CORE -DFRE_REV=$(GIT_REVISION)
 LINKFLAGS = -O1 $(LIBS)
 
 
