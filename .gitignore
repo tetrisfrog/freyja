@@ -1,0 +1,15 @@
+# Freyja Engine
+# Copyright (c) 2013 J. Hipps/Neo-Retro Group
+# Git ignore manifest
+
+*.o
+*.ao
+*.dll
+*.so
+*.exe
+*.log
+*.7z
+*.tar.gz
+*.zip
+freyja
+

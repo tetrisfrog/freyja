@@ -1,0 +1,5 @@
+#!/bin/bash
+echo Retreiving headers from OpenGL.org registry...
+wget -N http://www.opengl.org/registry/api/glext.h
+wget -N http://www.opengl.org/registry/api/glxext.h
+wget -N http://www.opengl.org/registry/api/wglext.h

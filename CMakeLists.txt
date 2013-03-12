@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 2.6)
+project(freyja)
+
+find_package(GTK2)
+find_package(GLUT)
+find_package(OpenGL)
+find_package(OpenAL)
+find_package(ZLIB)
+find_package(PNG)
+find_package(JPEG)
+find_package(Freetype)
+find_package(CURL)
+find_package(SWIG)
