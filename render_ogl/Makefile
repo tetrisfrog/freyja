@@ -16,7 +16,7 @@ OBJS = render_main.o display.o
 LIBS = -ldl -lX11 -lGL -lGLU
 
 ## Compilation & Programming parameters
-CFLAGS = -O1 -I/home/jacob/source/freyja -DFRE_RENDER_LIB
+CFLAGS = -O1 -I../ -DFRE_RENDER_LIB
 LINKFLAGS = -shared -O1 $(LIBS)
 
 

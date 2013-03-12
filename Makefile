@@ -16,7 +16,7 @@ OBJS = asset_mgmt.o config_mgmt.o core_control.o debug.o loadlib.o script_contro
 LIBS = -ldl
 
 ## Compilation & Programming parameters
-CFLAGS = -O1 -I/home/jacob/source/freyja -DFREYJA_CORE
+CFLAGS = -O1 -I. -DFREYJA_CORE
 LINKFLAGS = -O1 $(LIBS)
 
 
