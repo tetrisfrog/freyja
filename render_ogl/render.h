@@ -13,9 +13,9 @@
 #define FRZ_MAX_CONTEXT 16
 
 #ifdef FRE_RENDER_CORE
- 	#define ZREXPORT
+ 	#define FREXPORT
 #else
- 	#define ZREXPORT extern
+ 	#define FREXPORT extern
 #endif
 
 #ifdef FRE_RENDER_LIB
@@ -28,8 +28,6 @@
  	#elif FRE_PLATFORM == FRE_PLATFORM_MAC
  		#include "render_ogl/os_mac/ogl_mac.h"
  	#endif
-
- 	#include "render_ogl/glext/glext.h"
 
 	#define FRZX_OPTION		0
  	#define FRZX_REQD		1
@@ -44,16 +42,16 @@
 		int reqs;
 	} FRZ_OGL_EXT;
 
-	ZREXPORT void (*logthis)(int llevel, char* srcname, int srcline, char* fmt, ...);
-	ZREXPORT void (*fre_shutdown)();
+	FREXPORT void (*logthis)(int llevel, char* srcname, int srcline, char* fmt, ...);
+	FREXPORT void (*fre_shutdown)();
 
 	// OGL Extension func pointers
-	ZREXPORT PFNGLMULTITEXCOORD1FPROC fglMultiTexCoord1f;
-	ZREXPORT PFNGLMULTITEXCOORD2FPROC fglMultiTexCoord2f;
-	ZREXPORT PFNGLMULTITEXCOORD3FPROC fglMultiTexCoord3f;
-	ZREXPORT PFNGLMULTITEXCOORD4FPROC fglMultiTexCoord4f;
-	ZREXPORT PFNGLACTIVETEXTUREPROC fglActiveTexture;
-	ZREXPORT PFNGLCLIENTACTIVETEXTUREPROC fglClientActiveTexture;
+	FREXPORT PFNGLMULTITEXCOORD1FPROC fglMultiTexCoord1f;
+	FREXPORT PFNGLMULTITEXCOORD2FPROC fglMultiTexCoord2f;
+	FREXPORT PFNGLMULTITEXCOORD3FPROC fglMultiTexCoord3f;
+	FREXPORT PFNGLMULTITEXCOORD4FPROC fglMultiTexCoord4f;
+	FREXPORT PFNGLACTIVETEXTUREPROC fglActiveTexture;
+	FREXPORT PFNGLCLIENTACTIVETEXTUREPROC fglClientActiveTexture;
 
 	extern "C" {
 
@@ -65,11 +63,12 @@
 
 		void frz_context_init();
 		void* frz_context_ptr(int cdex);
-		int frz_context_create();
+		int frz_context_create(FRE_RENDER_MODE* rm_setup);
 		void frz_context_destroy(int ctx);
+		int frz_set_fullscreen(int ctx, int fsmode);
 
 		int frz_gfx_bind_glext();
-		
+
 		int frz_subsys_init_display(int ctx);
 		char* frz_subsys_enum_oglext(int ctx);
 		int frz_gfx_render();
@@ -77,11 +76,12 @@
 
 #else
 
-	ZEXPORTC int (*frz_init)(FRE_RENDER_INIT_DATA* rdata);
-	ZEXPORTC int (*frz_gfx_init)(int ctx);
-	ZEXPORTC int (*frz_gfx_kill)(int ctx);
-	ZEXPORTC int (*frz_gfx_update)(int ctx);
-	ZEXPORTC void* (*frz_context_ptr)(int cdex);
-	ZEXPORTC int (*frz_context_create)();
+	FEXPORTC int (*frz_init)(FRE_RENDER_INIT_DATA* rdata);
+	FEXPORTC int (*frz_gfx_init)(int ctx);
+	FEXPORTC int (*frz_gfx_kill)(int ctx);
+	FEXPORTC int (*frz_gfx_update)(int ctx);
+	FEXPORTC void* (*frz_context_ptr)(int cdex);
+	FEXPORTC int (*frz_context_create)(FRE_RENDER_MODE* rm_setup);
+	FEXPORTC int (*frz_set_fullscreen)(int ctx, int fsmode);
 
 #endif

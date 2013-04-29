@@ -26,6 +26,10 @@
 #define FRE_VERSION_STRING  FRE_VERSION "." FRE_REV_STR " " FRE_VERSION_MOD
 #define FRE_COMPILE_TIME	__DATE__ " " __TIME__
 
+
+// Max number of content loader modules
+#define MAX_LOADS				64
+
 // Constant defines
 #define FRE_PLATFORM_LINUX		1
 #define FRE_PLATFORM_WIN32		2
@@ -57,11 +61,11 @@
 
 // Superglobal exports
 #ifdef FRE_CORE_CONTROL
- 	#define ZEXPORTC
- 	#define ZEXPORT extern
+ 	#define FEXPORTC
+ 	#define FEXPORT extern
 #else
- 	#define ZEXPORTC extern
- 	#define ZEXPORT extern
+ 	#define FEXPORTC extern
+ 	#define FEXPORT extern
 #endif
 
 // Typedefs
@@ -111,53 +115,53 @@ typedef struct {
 
 #ifdef FREYJA_CORE
 // Superglobal definitions
-ZEXPORTC FRE_GLOBAL_CONFIG global_config;
+FEXPORTC FRE_GLOBAL_CONFIG global_config;
 
 ///////////////////////////////////////////////////////////
 // core_control.cpp - Core Control
 ///////////////////////////////////////////////////////////
-ZEXPORTC int fre_init();
+FEXPORTC int fre_init();
 
 ///////////////////////////////////////////////////////////
 // config_mgmt.cpp - Config Loading/Saving
 ///////////////////////////////////////////////////////////
-ZEXPORT int fre_set_val(char* keyval, void* valptr, int vtype);
-ZEXPORT void* fre_get_val(char* keyval, int* vtype);
-ZEXPORT char* read_token_string(char* cline);
-ZEXPORT int fre_load_config(char *cfilename);
+FEXPORT int fre_set_val(char* keyval, void* valptr, int vtype);
+FEXPORT void* fre_get_val(char* keyval, int* vtype);
+FEXPORT char* read_token_string(char* cline);
+FEXPORT int fre_load_config(char *cfilename);
 
 ///////////////////////////////////////////////////////////
 // loadlib.cpp - Dynamic Shared Lib loading
 ///////////////////////////////////////////////////////////
-ZEXPORT int fre_lib_load(FRE_LIBDATA* libx);
-ZEXPORT int fre_lib_unload(FRE_LIBDATA* libx);
-ZEXPORT void* fre_lib_bind(FRE_LIBDATA* libx, char* libfile);
-ZEXPORT int fre_lib_bindall(FRE_LIBDATA* libx, FRE_LIBFUNC* bindlist);
+FEXPORT int fre_lib_load(FRE_LIBDATA* libx);
+FEXPORT int fre_lib_unload(FRE_LIBDATA* libx);
+FEXPORT void* fre_lib_bind(FRE_LIBDATA* libx, char* libfile);
+FEXPORT int fre_lib_bindall(FRE_LIBDATA* libx, FRE_LIBFUNC* bindlist);
 
 ///////////////////////////////////////////////////////////
 // debug.cpp - Debug & Logging functions
 ///////////////////////////////////////////////////////////
-ZEXPORT void logthis(int llevel, char* srcname, int srcline, char* fmt, ...);
-ZEXPORT char* get_datestr(char* dstrx);
-ZEXPORT char* get_timestr(char* dstrx);
-ZEXPORT int log_begin();
-ZEXPORT int log_end();
+FEXPORT void logthis(int llevel, char* srcname, int srcline, char* fmt, ...);
+FEXPORT char* get_datestr(char* dstrx);
+FEXPORT char* get_timestr(char* dstrx);
+FEXPORT int log_begin();
+FEXPORT int log_end();
 
 ///////////////////////////////////////////////////////////
 // os_control.cpp
 ///////////////////////////////////////////////////////////
-ZEXPORT int fre_os_load_lib(FRE_LIBDATA* libx);
-ZEXPORT void* fre_os_bind_lib(FRE_LIBDATA* libx, char* funcname);
-ZEXPORT int fre_os_unload_lib(FRE_LIBDATA* libx);
+FEXPORT int fre_os_load_lib(FRE_LIBDATA* libx);
+FEXPORT void* fre_os_bind_lib(FRE_LIBDATA* libx, char* funcname);
+FEXPORT int fre_os_unload_lib(FRE_LIBDATA* libx);
 
 ///////////////////////////////////////////////////////////
 // asset_mgmt.cpp
 ///////////////////////////////////////////////////////////
-ZEXPORT int fre_objdex_init();
-ZEXPORT int fre_obj_create(int typex, char* objname);
-ZEXPORT int fre_obj_destroy(int iid);
-ZEXPORT int fre_obj_find(char* objname);
-ZEXPORT FRE_OBJECT* fre_obj_ptr(int iid);
+FEXPORT int fre_objdex_init();
+FEXPORT int fre_obj_create(int typex, char* objname);
+FEXPORT int fre_obj_destroy(int iid);
+FEXPORT int fre_obj_find(char* objname);
+FEXPORT FRE_OBJECT* fre_obj_ptr(int iid);
 
 #endif
 

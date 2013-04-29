@@ -29,6 +29,9 @@ $(TARGET): $(OBJS)
 
 clean :
 	rm -f *.o
+	rm -f os_linux/*.o
+	rm -f os_mac/*.o
+	rm -f os_win/*.o
 
 all : $(TARGET)
 

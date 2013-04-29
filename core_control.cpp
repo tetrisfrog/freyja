@@ -80,6 +80,19 @@ FRE_LIBFUNC render_funcs[] = {
 	FRE_RENDER_MODE rendset;
 	FRE_RENDER_INIT_DATA render_config;
 
+	/*
+	typedef struct {
+		int mode_ctl;
+		int screen_x;
+		int screen_y;
+		int fullscreen;
+	} FRE_RENDER_MODE;
+	*/
+	rendset.mode_ctl = 0;
+	rendset.screen_x = 1280;
+	rendset.screen_y = 720;
+	rendset.fullscreen = 0;
+
 	render_config.logthis_ptr = logthis;
 	render_config.fre_shutdown_ptr = fre_shutdown;
 
@@ -88,7 +101,7 @@ FRE_LIBFUNC render_funcs[] = {
  	init_rval = frz_init(&render_config);
  	zlog_debug("init_rval = %i\n",init_rval);
 
- 	context = frz_context_create();
+ 	context = frz_context_create(&rendset);
  	frz_gfx_init(context);
 
 	zlog_debug("Entering test loop...\n");

@@ -14,15 +14,16 @@
 
 // GLEXT Extension function mapping
 FRZ_OGL_EXT ogl_extmap[] = {
-	{"GL_ARB_multitexture",			"glMultiTexCoord1f",		(void**)&fglMultiTexCoord1f,		FRZX_REQD | FRZX_ARB },
-	{"GL_ARB_multitexture",			"glMultiTexCoord2f",		(void**)&fglMultiTexCoord2f,		FRZX_REQD | FRZX_ARB },
-	{"GL_ARB_multitexture",			"glMultiTexCoord3f",		(void**)&fglMultiTexCoord3f,		FRZX_REQD | FRZX_ARB },
-	{"GL_ARB_multitexture",			"glMultiTexCoord4f",		(void**)&fglMultiTexCoord4f,		FRZX_REQD | FRZX_ARB },
-	{"GL_ARB_multitexture",			"glActiveTexture",			(void**)&fglActiveTexture,			FRZX_REQD | FRZX_ARB },
-	{"GL_ARB_multitexture",			"glClientActiveTexture",	(void**)&fglClientActiveTexture,	FRZX_REQD | FRZX_ARB },
-	{"GL_ARB_texture_compression",	NULL,						NULL,								FRZX_OPTION },
-	{"GL_EXT_texture_compression_s3tc",	NULL,					NULL,								FRZX_OPTION },
-	{"GLX_AMD_gpu_association",		NULL,						NULL,								FRZX_OPTION },
+	{"GL_ARB_multitexture",					"glMultiTexCoord1f",		(void**)&fglMultiTexCoord1f,		FRZX_REQD | FRZX_ARB },
+	{"GL_ARB_multitexture",					"glMultiTexCoord2f",		(void**)&fglMultiTexCoord2f,		FRZX_REQD | FRZX_ARB },
+	{"GL_ARB_multitexture",					"glMultiTexCoord3f",		(void**)&fglMultiTexCoord3f,		FRZX_REQD | FRZX_ARB },
+	{"GL_ARB_multitexture",					"glMultiTexCoord4f",		(void**)&fglMultiTexCoord4f,		FRZX_REQD | FRZX_ARB },
+	{"GL_ARB_multitexture",					"glActiveTexture",			(void**)&fglActiveTexture,			FRZX_REQD | FRZX_ARB },
+	{"GL_ARB_multitexture",					"glClientActiveTexture",	(void**)&fglClientActiveTexture,	FRZX_REQD | FRZX_ARB },
+	{"GL_ARB_texture_non_power_of_two",		NULL,						NULL,								FRZX_OPTION | FRZX_ARB },
+	{"GL_ARB_texture_compression",			NULL,						NULL,								FRZX_OPTION },
+	{"GL_EXT_texture_compression_s3tc",		NULL,						NULL,								FRZX_OPTION },
+	{"GLX_AMD_gpu_association",				NULL,						NULL,								FRZX_OPTION },
 	{NULL, NULL, NULL}
 };
 

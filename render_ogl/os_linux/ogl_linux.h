@@ -15,6 +15,7 @@
 #include <GL/gl.h>
 #include <GL/glx.h>
 #include <GL/glu.h>
+#include "render_ogl/glext/glext.h"
 
 // Define function name for extension func pointer resolution
 #define OGLX_GetProcAddress glXGetProcAddress
@@ -33,4 +34,5 @@ typedef struct {
 	XEvent xev;
 	int sz_x;
 	int sz_y;
+	int fullscreen;
 } FRZ_OGLX_CONTEXT;
