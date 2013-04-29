@@ -21,6 +21,12 @@
 #define FRL_TYPE_SCRIPT			5
 #define FRL_TYPE_SPECIAL		6
 
+// Subtypes
+
+#define FRL_IMG_RGBA			0 	// 32-bit (alpha)
+#define FRL_IMG_RGB 			1 	// 24-bit (no alpha)
+#define FRL_IMG_MCY				2   // 8-bit intensity
+#define FRL_IMG_BMP				3   // 1-bit bitmap raw
 
 //#define FRL_DSPEC __cdecl
 #define FRL_DSPEC
@@ -35,8 +41,13 @@ typedef int (FRL_DSPEC * FRL_FUNC_TO_MEM)(void* dest_mem, void* src_mem, int s_s
 typedef struct {
 	long height, width, planes, depth;
 	int  type;
+	int  subtype;
 	char *data_ptr;
 } FRL_IMG_DATA;
+
+typedef struct {
+	char loader[8];
+} FRL_LOADER_TYPES;
 
 typedef struct {
 	int id;

@@ -22,6 +22,7 @@
 // Verision & Revision definitions
 #define FRE_VERSION 		"0.01"
 #define FRE_VERSION_MOD		"WIP"
+#define FRE_REV_INT			FRE_REV
 #define FRE_REV_STR			FRE_TOSTRING(FRE_REV)
 #define FRE_VERSION_STRING  FRE_VERSION "." FRE_REV_STR " " FRE_VERSION_MOD
 #define FRE_COMPILE_TIME	__DATE__ " " __TIME__
@@ -121,6 +122,7 @@ FEXPORTC FRE_GLOBAL_CONFIG global_config;
 // core_control.cpp - Core Control
 ///////////////////////////////////////////////////////////
 FEXPORTC int fre_init();
+FEXPORTC void fre_shutdown();
 
 ///////////////////////////////////////////////////////////
 // config_mgmt.cpp - Config Loading/Saving
@@ -162,6 +164,11 @@ FEXPORT int fre_obj_create(int typex, char* objname);
 FEXPORT int fre_obj_destroy(int iid);
 FEXPORT int fre_obj_find(char* objname);
 FEXPORT FRE_OBJECT* fre_obj_ptr(int iid);
+
+///////////////////////////////////////////////////////////
+// asset_mgmt.cpp
+///////////////////////////////////////////////////////////
+FEXPORT int frl_register_loader(char* modname);
 
 #endif
 

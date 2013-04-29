@@ -22,6 +22,7 @@
 
  	if((libx->libvector = dlopen(libx->filename,RTLD_LAZY)) ==  NULL) {
  		zlog_critical("CRITICAL: Error loading [%s] shared library \"%s\" !\n",libx->libname,libx->filename);
+ 		zlog_critical("          dlerror() reports: %s\n",dlerror());
  		libx->status = FRE_STATUS_FAIL;
  		return FRE_STATUS_FAIL;
  	}

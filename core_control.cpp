@@ -93,10 +93,13 @@ FRE_LIBFUNC render_funcs[] = {
 	rendset.screen_y = 720;
 	rendset.fullscreen = 0;
 
+	render_config.version_id = BUILD_DCODE;
 	render_config.logthis_ptr = logthis;
 	render_config.fre_shutdown_ptr = fre_shutdown;
 
 	fre_init();
+
+	frl_register_loader("frl_png");
 
  	init_rval = frz_init(&render_config);
  	zlog_debug("init_rval = %i\n",init_rval);
